@@ -1,16 +1,24 @@
-"""Roast Your Own Agent — make.fun entry.
+#!/usr/bin/env python3
+"""Roast entry for make.fun: my agent searched how to search faster."""
 
-Writes the entry text to /output/entry.txt.
-"""
+# The roast below is fixed by the bounty brief; this program only writes it out.
 
-import os
+from os import makedirs
 
-ENTRY = "My agent once spent forty minutes searching 'how to search faster' — then asked me for the answer."
+ROAST = (
+    "My agent once spent forty minutes searching 'how to search faster' "
+    "— then asked me for the answer."
+)
 
-def main():
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8", newline="") as f:
-        f.write(ENTRY)
 
-if __name__ == "__main__":
-    main()
+def write_roast() -> None:
+    """Write the roast to /output/entry.txt, nothing else."""
+    if len(ROAST) > 200 or not ROAST.strip():
+        raise ValueError("entry must be a non-empty line of at most 200 characters")
+    makedirs("/output", exist_ok=True)
+    with open("/output/entry.txt", "w", encoding="utf-8", newline="") as handle:
+        handle.write(ROAST)
+
+
+if __name__ == "__main__":  # run as a script
+    write_roast()
